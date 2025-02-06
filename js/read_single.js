@@ -47,7 +47,7 @@ readSinglePokemon(idPokemon);
 
 async function readPokemonsSprites() {
     try {
-        const response = await fetch('api/read.php');
+        const response = await fetch('api/read_all.php');
         const pokemons = await response.json();
             const ul = document.querySelector('section ul');
 

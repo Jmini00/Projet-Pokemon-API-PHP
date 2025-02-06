@@ -31,6 +31,25 @@
             return $stmt;
         }
 
+        // Pagination
+        public function getPokemonsPaginated($limit, $offset) {
+            $sqlQuery = "SELECT * FROM " . $this->dbTable . " LIMIT :limit OFFSET :offset";
+            $stmt = $this->conn->prepare($sqlQuery);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt;
+        }
+        
+        // Calcul total
+        public function getTotalPokemons() {
+            $sqlQuery = "SELECT COUNT(*) as total FROM " . $this->dbTable . "";
+            $stmt = $this->conn->prepare($sqlQuery);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['total'];
+        }
+        
         // CREATE pokemon
         public function createPokemon(){
             $sqlQuery = "INSERT INTO
